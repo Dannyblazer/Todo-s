@@ -72,6 +72,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Todo.wsgi.application'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # This is where Django collects static files for deployment.
+
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -119,13 +121,13 @@ USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
     os.path.join(BASE_DIR, 'media'),
 ]
 
-STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 # Default primary key field type
