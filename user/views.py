@@ -6,6 +6,13 @@ from .forms import *
 from django.http import HttpResponseRedirect
 # Create your views here.
 
+def home(request):
+    return render(request, 'user/main.html', context={})
+
+def dashboard(request):
+    return render(request, 'user/dashboard.html', context={})
+
+
 def registration_view(request):
     context = {}
     if not request.user.is_authenticatd:
@@ -16,9 +23,9 @@ def registration_view(request):
                 email = form.cleaned_data.get('email')
                 raw_password = form.cleaned_data.get('password1')
                 account = authenticate(email=email, password=raw_password)
-                #Automatic login after authentication
+                # Automatic login after authentication
                 dj_login(request, account)
-                return HttpResponseRedirect(reverse('general:home'))
+                return HttpResponseRedirect(reverse('user:home'))
             else:
                 context['registration_form'] = form
         else:
@@ -26,12 +33,12 @@ def registration_view(request):
             context['registration_form'] = form
         return render(request=request, template_name='user/registrations.html', context={"registration_form":form})
     else:
-        return redirect('general:home')
+        return redirect('user:home')
 
 def login_view(request):
     user = request.user
     if user.is_authenticated:
-        return redirect('general:home')
+        return redirect('user:home')
     if request.POST:
         form = UserAuthenticationForm(request.POST)
         if form.is_valid():
@@ -40,18 +47,18 @@ def login_view(request):
             user = authenticate(email=email, password=password)
             if user:
                 dj_login(request, user)
-                return redirect('general:home')
+                return redirect('user:home')
     else:
         form = UserAuthenticationForm()
     return render(request, 'user/login.html', context={'form':form})
 
 def logout(request):
     logout(request)
-    return redirect('general:home')
+    return redirect('user:home')
 
-def account_view(request):
+def account_update(request):
     if not request.user.is_authenticated:
-        return redirect('general:home')
+        return redirect('user:home')
     context = {}
     if request.POST:
         form = UserUpdateForm(request.POST, instance=request.user)

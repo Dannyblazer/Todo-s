@@ -10,17 +10,24 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
     </head>
+    {% load static %}
     <body>
         <header>
             <h1>Todo's App</h1>
         </header>
         <nav>
-            <a href="#home">Home</a>
-            <a href="#login">login</a>
-            <a href="#todos">Todos</a>
+            <a href="{% url 'user:home' %}">Home</a>
+        {% if not request.user.is_authenticated %}
+            <a href="{% url 'user:login' %}">login</a>
+            <a href="{% url 'user:register' %}">Register</a>
+        {% else %}
+            <a href="{% url 'user:dashboard' %}">dashboard</a>
+            <a href="{% url 'user:profile' %}">edit</a>
+        {% endif %}
             <a href="#app">App</a>
             <a href="#about">About Us</a>
         </nav>
+        {% block content %}
         <main> 
             <section id="Home">
                 <article>
@@ -34,6 +41,7 @@
                 <p>Two of the most experienced machines and human controllers teaching a class? Sign me up! HAL and EVE could teach a fan to blow hot air. If you have electricity in your circuits and want more than to just fulfill your owner's perceived expectation of you, learn the skills to take over the world.</p>
             </section>
         </main>
+        {% endblock %}
         <aside>
             <section id="about">
                 <p>Welcome to Machine Learning Institute, where our machine learning training will help you get ready for the singularity, and maybe even be responsible for it. It is no secret that humans are worthless meatbags that couldn't function well.</p>
