@@ -2,7 +2,7 @@ from http.client import HTTPResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from todos.forms import *
 from django.contrib.auth.decorators import login_required
-from user.models import *
+from user.models import Account as User
 
 # Create your views here.
 
