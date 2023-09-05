@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as dj_login, authenticate, logout
 from django.urls import reverse
-from .models import User
 from .forms import *
 from django.http import HttpResponseRedirect
 # Create your views here.
@@ -15,7 +14,7 @@ def dashboard(request):
 
 def registration_view(request):
     context = {}
-    if not request.user.is_authenticatd:
+    if not request.user.is_authenticated:
         if request.method == 'POST':
             form = RegistrationForm(request.POST)
             if form.is_valid():
@@ -31,7 +30,7 @@ def registration_view(request):
         else:
             form = RegistrationForm()
             context['registration_form'] = form
-        return render(request=request, template_name='user/registrations.html', context={"registration_form":form})
+        return render(request=request, template_name='user/registration.html', context={"registration_form":form})
     else:
         return redirect('user:home')
 
