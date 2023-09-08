@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
 
-from users.models import Account, Server
+from users.models import Account
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(max_length=60)
@@ -54,8 +54,3 @@ class AccountUpdateForm(forms.ModelForm):
                 return username
             raise forms.ValidationError("Username {} is already in use.".format(username))
     
-class ServerRegistrationForm(forms.ModelForm):
-
-    class Meta:
-        model = Server
-        fields = {'ip', 'port'}

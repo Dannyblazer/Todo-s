@@ -20,7 +20,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('user.urls')),
+    path('', include('users.urls')),
     path('todo/', include('todos.urls')),
 
         # Password reset links (ref: https://github.com/django/django/blob/master/django/contrib/auth/views.py)

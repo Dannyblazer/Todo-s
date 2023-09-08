@@ -1,5 +1,5 @@
 from django.db import models
-from user.models import Account as User
+from users.models import Account as User
 
 # Create your models here.
 class Todo(models.Model):

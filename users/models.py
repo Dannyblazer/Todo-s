@@ -3,8 +3,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.conf import settings
 from django.db.models.signals import post_save
-from django.dispatch import receiver
-from rest_framework.authtoken.models import Token
+
+
 
 
 class MyAccountManager(BaseUserManager):
@@ -61,28 +61,8 @@ class Account(AbstractBaseUser):
 	def has_module_perms(self, app_label):
 		return True
 	
-@receiver(post_save, sender=settings.AUTH_USER_MODEL)
-def create_auth_token(sender, instance=None, created=False, **kwargs):
-	if created:
-		Token.objects.create(user=instance)
-	
 
-class Server(models.Model):
-	account = models.ForeignKey(Account, on_delete=models.CASCADE)
-	ip = models.GenericIPAddressField(verbose_name="Ip Address")
-	port = models.IntegerField(default=0)
-
-
-	def __str__(self):
-		return str(self.account) if self.account else ''
-
-def upload_location(instance, filename):
-    file_path = 'account/{profile_id}/{filename}'.format(
-        profile_id=str(instance.account), filename=filename
-    )
-    return file_path
-
-class Profile(models.Model):
+'''class Profile(models.Model):
 	account = models.OneToOneField(Account, on_delete=models.CASCADE)
 	follower = models.ForeignKey(Account, related_name="owner", on_delete=models.CASCADE)
 	image = models.ImageField(upload_to=upload_location, null=True, blank=True)
@@ -95,3 +75,4 @@ class Profile(models.Model):
 	def __str__(self):
 		return str(self.first_name + " " + self.last_name)
 
+'''
