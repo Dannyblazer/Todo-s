@@ -6,47 +6,46 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Page Layout</title>
+	<title>Bob The Builder</title>
 	<style>
+		.item1 { grid-area: header; }
+		.item2 { grid-area: menu; }
+		.item3 { grid-area: main; }
+		.item4 { grid-area: right; }
+		.item5 { grid-area: bottom; }
+		.item6 { grid-area: footer; }
 
-		body {
-			margin: 0 auto;
-			background-position: center;
-			background-size: contain;
-		}
-
-		footer {
-			width: 100%;
-			bottom: 0px;
-			background-color: #000;
-			color: #fff;
-			position: absolute;
-			padding-top: 20px;
-			padding-bottom: 50px;
-			text-align: center;
+		.grid-container {
+			display: grid;
+			grid-template-areas:
+			  'header menu menu menu menu menu'
+			  'main main main main right right'
+			  'main main main main bottom bottom'
+			  'footer footer footer footer footer footer';
+			gap: 10px;
+			background-color: white;
+			padding: 10px;
+		  }
+		  
+		  .grid-container > div {
+			background-color: green;
+			padding: 20px 0;
+			border-radius: 20px;
 			font-size: 30px;
-			font-weight: bold;
-		}
-
-		.body_sec {
-			margin-left: 20px;
-		}
+		  }
+		
 	</style>
 </head>
 
 <body>
-	{% include 'snippets/header.html' %}
-	<!-- Body section -->
-	<main class="body_sec">
-		<section id="Content">
-			{% block content %}
-
-			{% endblock %}
-		</section>
-	</main>
-
-	<!-- Footer Section -->
-	<footer>Footer Section</footer>
+	<div class='grid-container'>
+		<div class='item1'>{% include 'snippets/header.html' %}</div>
+		<div class='item2'>{% include 'snippets/nav.html' %}</div>
+		<div class='item3'>Main</div>	
+		<div class='item4'>Right</div>
+		<div class='item5'>bottom</div>
+		<div class='item6'>footer</div>
+	</div>
 </body>
 
 </html>

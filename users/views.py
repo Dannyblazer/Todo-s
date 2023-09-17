@@ -77,7 +77,6 @@ def account_view(request):
         form = AccountUpdateForm(initial={"email": request.user.email, "username":request.user.username})
     
     todo = Todo.objects.filter(author=request.user)
-    server_list = Server.objects.filter(account=request.user)
     context["account_form"] = form
     context["todos"] = todo
     return render(request, "users/account.html", context)

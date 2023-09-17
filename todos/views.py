@@ -1,4 +1,5 @@
 from http.client import HTTPResponse
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from todos.forms import *
 from django.contrib.auth.decorators import login_required
@@ -25,23 +26,33 @@ def create_todo(request):
     return render(request, 'todo/create.html', context)
 
 @login_required
-def edit_task(request, task_id):
+def edit_todo(request, task_id):
     context = {}
-    task = get_object_or_404(Todo, pk=task_id)
-    if not request.user.email == task.user.email:
+    todo = get_object_or_404(Todo, pk=task_id)
+    if not request.user.email == todo.user.email:
         return HTTPResponse('You are not the owner of this Task.')
     if request.POST:
-        form = task_update_form(request.POST or None, instance=task)
+        form = task_update_form(request.POST or None, instance=todo)
         if form.is_valid():
             obj = form.save(commit=False)
             obj.save()
-            task = obj
+            todo = obj
     form = task_update_form(
         initial={
-            'title':task.title,
-            'description': task.description,
-            'priority': task.priority,
+            'title':todo.title,
+            'description': todo.description,
+            'priority': todo.priority,
         }
     )
     return render(request, 'todo/update.html', context={'success_message':'Task Updated!', 'form':form})
+
+@login_required
+def delete_todo(request, task_id):
+    context = {}
+    user = request.user.email
+    todo = get_object_or_404(Todo, pk=task_id)
+    if not request.user.email == todo.user.email:
+        return HttpResponse('You are not the onwer of this todo')
+    if request.POST:
+        pass
 
