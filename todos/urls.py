@@ -4,5 +4,5 @@ app_name = 'todos'
 
 urlpatterns = [
     path('create/', create_todo, name='create'),
-    path('update/', edit_task, name='edit'),
+    path('update/', edit_todo, name='edit'),
   ]

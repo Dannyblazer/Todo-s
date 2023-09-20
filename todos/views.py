@@ -54,5 +54,7 @@ def delete_todo(request, task_id):
     if not request.user.email == todo.user.email:
         return HttpResponse('You are not the onwer of this todo')
     if request.POST:
-        pass
+        todo.delete()
+        return redirect('users:index')
+    return HttpResponse('Invalid request method')
 
