@@ -138,6 +138,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'users.Account'
 
-GRAPHENE = {
-    "SCHEMA": "django_root.schema.schema"
-}
+"""GRAPHENE = {
+    "SCHEMA": "blog.schema.schema"
+}"""

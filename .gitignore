@@ -1,0 +1,12 @@
+# created by virtualenv automatically
+
+env/
+/users/migrations/
+/blog/migrations/
+/users/__pycache__/
+//__pycache__/
+/static_cdn/
+/static/
+/Todo/__pycache__/
+/blog/__pycache__/
+pyvenv.*
