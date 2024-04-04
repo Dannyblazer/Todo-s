@@ -17,11 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from django.urls import path, include
+from graphene_django.views import GraphQLView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', include('users.urls')),
-    path('todo/', include('todos.urls')),
+    path('admin/', admin.site.urls),
+    path("graphql", GraphQLView.as_view(graphiql=True)),
+    #path('todo/', include('todos.urls')),
 
         # Password reset links (ref: https://github.com/django/django/blob/master/django/contrib/auth/views.py)
     path('password_change/done/', auth_views.PasswordChangeDoneView.as_view(template_name='registration/password_change_done.html'), 

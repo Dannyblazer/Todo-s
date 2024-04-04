@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.template import loader
 from users.models import Account
 from django.urls import reverse
-from todos.models import Todo
+#from todos.models import Todo
 # Create your views here.
 
 def index(request):
@@ -76,7 +76,7 @@ def account_view(request):
     else:
         form = AccountUpdateForm(initial={"email": request.user.email, "username":request.user.username})
     
-    todo = Todo.objects.filter(author=request.user)
+    todo = "Todo.objects.filter(author=request.user)"
     context["account_form"] = form
     context["todos"] = todo
     return render(request, "users/account.html", context)
