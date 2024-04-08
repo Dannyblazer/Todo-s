@@ -1,4 +1,4 @@
-From Python:3.11.2-stretch
+From python:3.11.2
 
 # Set unbuffered output for python
 ENV PYTHONUNBUFFERED 1

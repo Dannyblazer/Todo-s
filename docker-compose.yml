@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    environment:
+      MYENV: env
+    volumes:
+      - .:/Todo
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    # You can add additional configurations for the web service here
+
+  web_migrate:
+    extends:
+      service: web
+    command: python manage.py migrate
