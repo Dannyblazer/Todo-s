@@ -36,7 +36,7 @@ class Query(graphene.ObjectType):
 # Define mutations
 
 class CreateBlogPost(graphene.Mutation):
-    """Mutation for creating a new blog post."""
+    """Mutations for creating a new blog post."""
     class Arguments:
         title = graphene.String()
         subtitle = graphene.String()
