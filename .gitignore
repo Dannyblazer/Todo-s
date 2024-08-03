@@ -10,3 +10,4 @@ env/
 /Todo/__pycache__/
 /blog/__pycache__/
 pyvenv.*
+.env
